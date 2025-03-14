@@ -1,0 +1,34 @@
+<div class="row py-16">
+    @for (item of products; track $index) {
+    <div class="w-full sm:w-1/2 md:w-1/3 px-1 mb-5 lg:w-1/6">
+        <div
+            class="product transition-all max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-white dark:border-gray-200">
+            @if (!wishlist.includes(item.id)) {
+                <i (click)="addToWishlist(item.id)" class="far fa-heart heart text-green-600"></i>
+            }
+        
+            @if (wishlist.includes(item.id)) {
+                <i (click)="removeFromWishlist(item.id)" class="fas fa-heart text-green-600 heart"></i>
+            }
+            <a [routerLink]="'/prdouctDetails/'+ item.id">
+                <img class="p-8 rounded-t-lg" [src]="item.imageCover" alt="product image" />
+
+                <div class="px-5 pb-3">
+                    <span class="text-green-600 font-light">{{item.category.name}}</span>
+
+                    <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-black">
+                        {{item.title.split(" ").splice(0,2).join(" ")}}</h5>
+
+                    <div class="flex items-center justify-between mt-6">
+                        <span class="text-2xl font-medium text-gray-900 dark:text-black">{{item.price | currency
+                            }}</span>
+                        <span class=" font-medium px-2.5 py-0.5 rounded-sm ms-3"><i
+                                class="fa fa-star text-yellow-400"></i> {{item.ratingsAverage}} </span>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+    }
+</div>

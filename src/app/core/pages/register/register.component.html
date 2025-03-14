@@ -1,0 +1,127 @@
+<section class="py-8 vh-100">
+    <form class="mx-auto bg-gray-100 shadow p-6 my-8 rounded-xl max-w-6xl" [formGroup]="registerForm" (ngSubmit)="register()">
+    
+        @if(apiErrorMessage){   
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                <span class="font-medium">
+                    {{apiErrorMessage}}
+                </span>
+            </div>
+        }
+        
+        <h1 class="text-green-600 text-3xl">Register Now:</h1>
+        <div class="relative z-0 w-full mb-5 group mt-2">
+            <input type="text" name="name" formControlName="name" id="name"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                placeholder=" " required />
+            <label for="name"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Name
+            </label>
+        </div>
+    
+        @if (retriveControl('name')?.errors && retriveControl('name')?.touched) {
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                <span class="font-medium">
+                    @if (retriveControl('name')?.errors?.['required']) {
+                        Required
+                    }@else if (retriveControl('name')?.errors?.['minlength']) {
+                        minlength should be 3
+                    }@else if (retriveControl('name')?.errors?.['maxlength']) {
+                        maxlength sould be 10
+                    }
+                </span>
+              </div>
+        }
+    
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="email" name="email" formControlName="email" id="email"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                placeholder=" " required />
+            <label for="email"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
+                address</label>
+        </div>
+    
+        @if (retriveControl('email')?.errors && retriveControl('email')?.touched) {
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                <span class="font-medium">
+                    @if (retriveControl('email')?.errors?.['required']) {
+                        Required
+                    }@else if (retriveControl('email')?.errors?.['email']) {
+                        Invalid Email
+                    }
+                </span>
+              </div>
+        }
+    
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="password" formControlName="password" name="password" id="password"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                placeholder=" " required />
+            <label for="password"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Password</label>
+        </div>
+    
+        @if (retriveControl('password')?.errors && retriveControl('password')?.touched) {
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                <span class="font-medium">
+                    @if (retriveControl('password')?.errors?.['required']) {
+                        Required
+                    }@else if (retriveControl('password')?.errors?.['pattern']) {
+                        Invalid Password
+                    }
+                </span>
+              </div>
+        }
+    
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="password" name="rePassword" formControlName="rePassword" id="rePassword"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                placeholder=" " required />
+            <label for="rePassword"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Confirm
+                password</label>
+        </div>
+    
+        @if (registerForm.errors?.['misMatch'] && retriveControl('rePassword')?.touched) {
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                Repassword should Match password    
+            </div>
+        }
+    
+        <div class="relative z-0 w-full mb-5 group">
+            <input type="tel" formControlName="phone" name="phone" id="phone"
+                class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                placeholder=" " required />
+            <label for="phone"
+                class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
+                number</label>
+        </div>
+    
+        @if (retriveControl('phone')?.errors && retriveControl('phone')?.touched) {
+            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                <span class="font-medium">
+                    @if (retriveControl('phone')?.errors?.['required']) {
+                        Required
+                    }@else if (retriveControl('phone')?.errors?.['pattern']) {
+                        Invalid Phone
+                    }
+                </span>
+              </div>
+        }
+    
+        <div class="flex items-center">
+            <button type="submit"   [disabled]="!registerForm.valid" [disabled]="callingAPI" [ngClass]="{'bg-opacity-30': callingAPI}"
+                class="text-white bg-green-600 editFont focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  transition-all mr-5">
+                @if (callingAPI) {
+                    <i class="fa fa-spin fa-spinner"></i>
+                }@else {
+                    Register
+                }
+                </button>
+            <p class="text-sm font-light text-gray-500 dark:text-gray-500">You have an account yet? <a routerLink="/login"
+                    routerLinkActive="router-link-active"><span class="text-green-600 font-bold">Login now</span></a></p>
+        </div>
+    
+    </form>
+</section>

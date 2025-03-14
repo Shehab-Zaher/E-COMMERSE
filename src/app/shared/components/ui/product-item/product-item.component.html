@@ -1,0 +1,39 @@
+
+
+<div class="w-full product max-w-sm pb-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-white dark:border-gray-200">
+    @if (!wishlist.includes(product.id)) {
+        <i (click)="addToWishlist(product.id)" class="far fa-heart heart text-green-600"></i>
+    }
+
+    @if (wishlist.includes(product.id)) {
+        <i (click)="removeFromWishlist(product.id)" class="fas fa-heart text-green-600 heart"></i>
+    }
+
+    <a [routerLink]="'/prdouctDetails/'+ product.id">
+        <img class="p-8 rounded-t-lg" [src]="product.imageCover" alt="product image" />
+
+        <div class="px-5 pb-3">
+            <span class="text-green-600 font-light">{{product.category.name}}</span>
+
+            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-black">{{product.title.split(" ").splice(0,2).join(" ")}}</h5>
+    
+            <div class="flex items-center justify-between mt-6">
+                <span class="text-2xl font-medium text-gray-900 dark:text-black">{{product.price | currency }}</span>
+                <span class=" font-medium px-2.5 py-0.5 rounded-sm ms-3"><i class="fa fa-star text-yellow-400"></i> {{product.ratingsAverage}} </span>
+            </div>
+    
+        </div>
+    </a>
+
+    <div class="flex justify-center w-full">
+        <button (click)="addToCart(product.id)" class="btn px-16">
+            @if (isCallingAPI && product.id == clickedId) {
+                <i class="fa fa-spinner fa-spin"></i>
+            }@else {
+                Add to cart
+            }
+        </button>
+    </div>
+
+
+</div>

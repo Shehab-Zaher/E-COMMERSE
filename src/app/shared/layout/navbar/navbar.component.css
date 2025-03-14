@@ -1,0 +1,30 @@
+.active{
+    @apply text-green-600 font-semibold
+}
+
+.signOutEdit{
+    transition: all 0.3s;
+}
+
+.signOutEdit:hover{
+    box-shadow: 2px 2px 10px green;
+}
+
+.editSign{
+    transition: all 0.3s;
+}
+
+.editSign:hover{
+    box-shadow: 2px 2px 10px green;
+    color: white;
+}
+
+.aedit{
+    position: relative;
+}
+
+.spedit{
+    position: absolute;
+    top: 0;
+    right: 0;
+}

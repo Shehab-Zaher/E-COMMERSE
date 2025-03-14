@@ -1,0 +1,11 @@
+.focus\:ring-4:focus {
+    box-shadow: 2px 2px 10px green;
+}
+
+.editFont{
+    transition: all 0.3s;
+}
+
+.editFont:hover{
+    box-shadow: 2px 2px 10px green;
+}

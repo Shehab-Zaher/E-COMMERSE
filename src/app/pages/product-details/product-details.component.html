@@ -1,0 +1,31 @@
+<div class="row items-center py-9">
+    <div class="w-full sm:w-1/4">
+        <owl-carousel-o [options]="customOptions">
+
+            @for (item of productDetails.images; track $index) {
+                <ng-template carouselSlide [id]="item">
+                    <img [src]="item">
+                  </ng-template>
+            }
+
+        </owl-carousel-o>
+    </div>
+
+    <div class="w-full  sm:w-3/4 px-5">
+        <h1 class="text-4xl font-semibold mb-3">{{productDetails?.title}}</h1>
+        <p class="mb-10">{{productDetails.description}}</p>
+        <span class="text-green-600">{{productDetails.category.name}}</span>
+        <div class="flex justify-between mt-2">
+            <p class="text-2xl">{{productDetails.price | currency }} </p>
+            <p><i class="fa fa-star text-yellow-400"></i> {{productDetails.ratingsAverage}}</p>
+        </div>
+        <button class="btnDetails mt-2" (click)="addToCart(productDetails.id)">
+            @if (isCallingAPI) {
+                <i class="fa fa-spinner fa-spin"></i>
+            }@else {
+                + Add to Cart
+            }  
+        </button>
+    </div>
+
+</div>

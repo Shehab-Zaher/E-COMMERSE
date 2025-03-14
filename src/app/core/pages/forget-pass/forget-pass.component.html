@@ -1,0 +1,161 @@
+<section class="py-9 vh-100">
+    <h1 class="text-green-600 text-3xl mx-auto max-w-6xl">Forget Password:</h1>
+
+    @if(steps == 1){
+        <form class="mx-auto bg-gray-100 shadow p-6 my-8 rounded-xl max-w-6xl" [formGroup]="VerifyEmail" (ngSubmit)="emailSubmit(VerifyEmail)">
+            @if(apiErrorMessage){   
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">
+                        {{apiErrorMessage}}
+                    </span>
+                </div>
+            }
+            
+        
+            <div class="relative z-0 w-full mb-5 group mt-4">
+                <input type="email" name="email" formControlName="email" id="email"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                    placeholder=" " required />
+                <label for="email"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
+                    address</label>
+            </div>
+        
+            @if (retriveControl('email')?.errors && retriveControl('email')?.touched) {
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">
+                        @if (retriveControl('email')?.errors?.['required']) {
+                            Required
+                        }@else if (retriveControl('email')?.errors?.['email']) {
+                            Invalid Email
+                        }
+                    </span>
+                  </div>
+            }
+    
+            <div class="flex items-center">
+                <button type="submit"   [disabled]="!VerifyEmail.valid" [disabled]="callingAPI" [ngClass]="{'bg-opacity-30': callingAPI}"
+                    class="ms-auto text-white bg-green-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  transition-all mr-5">
+                    @if (callingAPI) {
+                        <i class="fa fa-spin fa-spinner"></i>
+                    }@else {
+                        Send Email
+                    }
+                    </button>
+            </div>
+        </form>
+    }@else if (steps == 2) {
+        <form class="mx-auto bg-gray-100 shadow p-6 my-8 rounded-xl max-w-6xl" [formGroup]="VerifyCode" (ngSubmit)="CodeSubmit(VerifyCode)">
+    
+            @if(apiErrorMessage){   
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">
+                        {{apiErrorMessage}}
+                    </span>
+                </div>
+            }
+      
+        
+    
+            <div class="relative z-0 w-full mb-5 group mt-4">
+                <input type="text" name="resetCode" formControlName="resetCode" id="resetCode"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                    placeholder=" " required />
+                <label for="resetCode"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Code</label>
+            </div>
+    
+            @if (retriveControl('resetCode')?.errors && retriveControl('resetCode')?.touched) {
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">
+                        @if (retriveControl('resetCode')?.errors?.['required']) {
+                            Required
+                        }@else if (retriveControl('resetCode')?.errors?.['pattern']) {
+                            Invalid Code
+                        }
+                    </span>
+                  </div>
+            }
+    
+            <div class="flex items-center">
+                <button type="submit"   [disabled]="!VerifyCode.valid" [disabled]="callingAPI" [ngClass]="{'bg-opacity-30': callingAPI}"
+                    class="ms-auto text-white bg-green-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  transition-all mr-5">
+                    @if (callingAPI) {
+                        <i class="fa fa-spin fa-spinner"></i>
+                    }@else {
+                        Send Code
+                    }
+                    </button>
+            </div>
+        
+        </form>
+    }@else if (steps == 3) {
+        <form class="mx-auto bg-gray-100 shadow p-6 my-8 rounded-xl max-w-6xl" [formGroup]="resetPass" (ngSubmit)="resetSubmit(resetPass)">
+    
+            @if(apiErrorMessage){   
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">
+                        {{apiErrorMessage}}
+                    </span>
+                </div>
+            }
+            
+            
+    
+    
+            <div class="relative z-0 w-full mb-5 group mt-4">
+                <input type="email" name="email" formControlName="email" id="email"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                    placeholder=" " required />
+                <label for="email"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Email
+                    address</label>
+            </div>
+        
+            @if (retriveControl('email')?.errors && retriveControl('email')?.touched) {
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">
+                        @if (retriveControl('email')?.errors?.['required']) {
+                            Required
+                        }@else if (retriveControl('email')?.errors?.['email']) {
+                            Invalid Email
+                        }
+                    </span>
+                  </div>
+            }
+    
+    
+            <div class="relative z-0 w-full mb-5 group">
+                <input type="password" formControlName="newPassword" name="newPassword" id="newPassword"
+                    class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-green-600 appearance-none dark:text-gray-900 dark:border-gray-400 dark:focus:border-green-600 focus:outline-none focus:ring-0 focus:border-green-600 peer"
+                    placeholder=" " required />
+                <label for="newPassword"
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-green-600 peer-focus:dark:text-green-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">New Password</label>
+            </div>
+        
+            @if (retriveControl('newPassword')?.errors && retriveControl('newPassword')?.touched) {
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-red-200 dark:text-red-800" role="alert">
+                    <span class="font-medium">
+                        @if (retriveControl('newPassword')?.errors?.['required']) {
+                            Required
+                        }@else if (retriveControl('newPassword')?.errors?.['pattern']) {
+                            Invalid Password
+                        }
+                    </span>
+                  </div>
+            }
+        
+            <div class="flex items-center">
+                <button type="submit"   [disabled]="!resetPass.valid" [disabled]="callingAPI" [ngClass]="{'bg-opacity-30': callingAPI}"
+                    class="ms-auto text-white bg-green-700 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  transition-all mr-5">
+                    @if (callingAPI) {
+                        <i class="fa fa-spin fa-spinner"></i>
+                    }@else {
+                        Reset Password
+                    }
+                    </button>
+            </div>
+        
+        </form>
+    }
+</section>

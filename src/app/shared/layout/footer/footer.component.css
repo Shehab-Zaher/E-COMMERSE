@@ -1,0 +1,13 @@
+@media (max-width: 340px) {
+    .editFont{
+        font-size: 10px;
+    }
+}
+
+.editFont{
+    transition: all 0.3s;
+}
+
+.editFont:hover{
+    box-shadow: 2px 2px 10px green;
+}
